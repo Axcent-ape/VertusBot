@@ -68,7 +68,8 @@ async def start(thread: int, session_name: str, phone_number: str, proxy: [str, 
                         logger.error(f"Thread {thread} | {account} | Can't upgrade {upgrade}! Response {status}")
 
                 cards = None
-                while True:
+                if config.BUYCARDS:
+                 while True:
                     await asyncio.sleep(random.uniform(*config.DELAYS['BUY_CARD']))
                     card = await vertus.get_profitable_upgrade_card(balance, cards)
                     if not card: break
